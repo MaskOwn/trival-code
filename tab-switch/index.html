@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>选项卡切换代码 - 20171011</title>
+    <style>
+
+        ul,
+        li {
+            list-style: none;
+        }
+
+        .tab-wrapper div[class^="target"] {
+            display: none;
+        }
+
+        .target-item-container {
+            /*background: #eee;*/
+        }
+
+        .target-item-container li {
+            float: left;
+            width: 25%;
+            border-bottom: 2px solid transparent;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .target-box-active {
+            display: block!important;
+        }
+
+        .target-item-active {
+            border-bottom: 2px solid #f06060!important;
+            color: #f06060;
+        }
+
+        .clearfix::before,
+        .clearfix::after {
+            display: block;
+            clear: both;
+            height: 0;
+            content: '';
+        }
+    </style>
+</head>
+<body>
+    <div class="tab-wrapper">
+        <ul class="target-item-container clearfix">
+            <li data-target="target-1"  class="target-item-active">全部</li>
+            <li data-target="target-2">待付款</li>
+            <li data-target="target-3">待消费</li>
+            <li data-target="target-4">待评价</li>
+
+        </ul>
+        <div class="target-1 target-box-active">
+            第1个tab
+        </div>
+        <div class="target-2">
+            第2个tab
+        </div>
+        <div class="target-3">
+            第3个tab
+        </div>
+        <div class="target-4">
+            第4个tab
+        </div>
+    </div>
+
+    <script src="../common/js/jquery-3.2.0.min.js"></script>
+    <script>
+        $(function() {
+
+            // 选项卡切换
+            $('.tab-wrapper').on('click', '.target-item-container li', function(e) {
+                var target = $(this).data('target'),
+                    $targetObj = $('.' + target);
+                if (!$targetObj.hasClass('target-box-active')) {
+                    $targetObj.addClass('target-box-active').siblings().removeClass('target-box-active');
+                    $(this).addClass('target-item-active').siblings().removeClass('target-item-active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
